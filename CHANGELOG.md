@@ -2,6 +2,15 @@
 
 ## [[unpublished]](https://github.com/mlange-42/ark/compare/v0.8.3...main)
 
+### Features
+
+- Adds world state snapshots, for checkpoints and restarts, like replaying a simulation from a specific frame.
+  Take a snapshot with `World.Snapshot` (or `World.TakeSnapshot` for error handling),
+  and restore it with `World.Restore` (or `World.MustRestore`).
+  Snapshots cover entities, component values, entity generations and resources.
+  Entities keep their IDs and generations, so entity references and relation targets remain valid.
+  Multiple checkpoints can be taken and restored in any order.
+
 ### Performance
 
 - Optimizes and simplifies the world lock bit pool (#511)
@@ -11,6 +20,8 @@
 
 - Fixes data race when creating queries from the same filter concurrently (by [peterpothmann](https://github.com/peterpothmann))
 - Fixes panic when a table column grows beyond 2 GiB (#519 by [peterpothmann](https://github.com/peterpothmann))
+- Fixes `World.Alive` panicking for entity handles beyond the entity pool, instead of reporting them as dead.
+  This can happen for handles from before `World.Reset` or `World.Restore` into a smaller snapshot.
 
 ## [[v0.8.3]](https://github.com/mlange-42/ark/compare/v0.8.2...v0.8.3)
 

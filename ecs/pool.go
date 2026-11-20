@@ -72,8 +72,10 @@ func (p *entityPool) Reset() {
 }
 
 // Alive returns whether an entity is still alive, based on the entity's generations.
+// Entities with an ID beyond the used entities are not alive,
+// for example entities from before [World.Restore] into a smaller snapshot.
 func (p *entityPool) Alive(e Entity) bool {
-	return e.gen == (*Entity)(unsafe.Add(p.pointer, entitySize*uintptr(e.id))).gen
+	return int(e.id) < len(p.entities) && e.gen == (*Entity)(unsafe.Add(p.pointer, entitySize*uintptr(e.id))).gen
 }
 
 // Len returns the current number of used entities.

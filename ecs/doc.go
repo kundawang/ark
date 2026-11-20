@@ -17,6 +17,7 @@
 //   - [Exchange1], [Exchange2] etc. allows to add, remove and exchange components.
 //   - [Resource] provides access the world's [Resources].
 //   - [Observer], [Observer1], etc. allow to react on ECS operations.
+//   - [Snapshot] allows to save and restore the state of a [World].
 //   - See the separate module [ark-serde] for serialization.
 //
 // # ECS Manipulations
@@ -38,6 +39,10 @@
 //   - Exchange components of an entity: [Exchange2.Exchange], [Exchange2.ExchangeFn].
 //   - Change relationship targets: [Map.SetRelation], [Map2.SetRelations].
 //   - Remove an entity from the world: [World.RemoveEntity].
+//
+// Save and restore world state:
+//   - Take a snapshot: [World.Snapshot], [World.TakeSnapshot].
+//   - Restore a snapshot: [World.Restore], [World.MustRestore].
 //
 // Manipulate entities in batches:
 //   - Create entities: [World.NewEntities]
